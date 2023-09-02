@@ -17,42 +17,29 @@
 """
 
 class Solution:
-    def cmp(self, nums1, nums2):
-        if nums1[0] < nums2[0]:
-            return 1
-        elif nums1[0] > nums2[0]:
-            return 0
-        else:
-            if nums1[1] < nums2[1]:
-                return 1
-            else:
-                return 0
     def merge(self, intervals):
         intervals = sorted(intervals, key=lambda x:[x[0],x[1]])
         result = []
         for interval in intervals:
             if len(result) == 0:
                 result.append(interval)
+                continue
             start, end = interval
             if start == end:
-                if start < result[-1][1]:
+                if start <= result[-1][1]:
                     continue
                 else:
-                    result[-1][1] = start
-            if start < result[-1][1]:
-                if start >= result[-1][0]:
-                    if end <= result[-1][1]:
-                        continue
-                    else:
-                        result[-1][1] = end
-
-                else:
-                    if end >=
-            elif start == result[-1][1]
-                pass
+                    result.append(interval)
             else:
-                pass
-        print(intervals)
+                if start <= result[-1][1]:
+                    if end > result[-1][1]:
+                        result[-1][1] = end
+                else:
+                    result.append(interval)
+        return result
 
 obj = Solution()
-obj.merge(intervals = [[2,6],[1,3],[8,10],[1,4], [15,18]])
+print(obj.merge(intervals = [[2,6],[1,3],[8,10],[1,4], [15,18]]))
+print(obj.merge(intervals = [[1,4],[4,5]]))
+print(obj.merge(intervals = [[1,4],[2,3]]))
+print(obj.merge(intervals = [[2,3],[2,2],[3,3],[1,3],[5,7],[2,2],[4,6]]))
