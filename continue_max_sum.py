@@ -1,9 +1,9 @@
 def get_result(array):
     res = min(array)
-    cur_sum = 0
+    past_sum = 0
     for idx in range(len(array)):
-        cur_sum = max(cur_sum + array[idx], array[idx])
-        res = max(cur_sum, res)
+        past_sum = max(past_sum + array[idx], array[idx])
+        res = max(past_sum, res)
     return res
 
 
